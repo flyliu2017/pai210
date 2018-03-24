@@ -1,7 +1,8 @@
 # Open Platform for AI (PAI)
 
 [![Build Status](https://travis-ci.org/Microsoft/pai.svg?branch=master)](https://travis-ci.org/Microsoft/pai)
-##PAI使用手册
+
+## PAI使用手册
 
 地址：192.168.2.210:9286
 
