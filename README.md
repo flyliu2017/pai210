@@ -1,6 +1,71 @@
 # Open Platform for AI (PAI)
 
 [![Build Status](https://travis-ci.org/Microsoft/pai.svg?branch=master)](https://travis-ci.org/Microsoft/pai)
+##PAI使用手册
+
+地址：192.168.2.210:9286
+
+使用过程：
+1）	数据集准备
+a)	使用pai-fs上传数据
+b)	记录到数据库中
+2）	镜像准备
+a)	建议使用xwzheng/pai.run.deepo镜像，如果需要自定义则在头结点上调试
+b)	自定义的镜像事先上传到docker hub上
+c)	镜像一般是公开的，所以不要把自己写的代码打包进去，而是把代码整合在一个文件夹中，通过pai-fs上传，并记下这个位置
+3）	提交任务
+a)	从侧边栏进submit页面
+b)	选择数据集，选择代码路径，选择输出路径, 按页面提示编写json提交脚本，注意json中不要有注释
+c)	点击提交按钮
+4）	开始运行
+a)	从侧边栏进入job view页面，可以在里面查看任务日志
+b)	当任务开始运行后，可以在此任务页面中找到程序输出log
+5）	下载结果
+a)	用pai-fs下载训练结果
+b)	训练结果的存放路径在提交任务的json文件中指定
+
+pai-fs使用说明：
+下载pai-fs安装包，http://192.168.2.210:9286/assets/util/pai-fs.zip
+解压后安装依赖包：pip install -r requirements.txt
+使用“python pai-fs.py -h”，查看使用帮助
+常用命令：
+pai-fs.py --config host=192.168.2.210 port=50070 生成配置
+pai-fs.py –ls hdfs:// 查看根目录
+pai-fs.py –mkdir hdfs://data 在根目录下创建data目录
+pai-fs.py –cp –r /data/* hdfs://data 拷贝本地/data目录下的内容到hdfs上的/data中
+pai-fs.py –rm hdfs://data 删除hdfs中的/data目录（或文件）
+目前hdfs并没有开权限管理，是有可能被其他人误删文件的
+
+任务脚本json示例：
+{
+  "jobName": "jobName_1",	# jobName中不能有空格，不能和已有任务重名
+  "image": "xwzheng/pai.run.deepo",
+  "dataDir": "hdfs://192.168.2.210:9000/data",
+  "outputDir": "hdfs://192.168.2.210:9000/output",
+  "codeDir": "hdfs://192.168.2.210:9000/code",
+  "taskRoles": [
+    {
+      "name": "ps_server",
+      "taskNumber": 1,
+      "cpuNumber": 2,
+      "memoryMB": 4096,
+      "gpuNumber": 2,
+      "command": "python incubator-mxnet/example/image-classification/train_cifar10.py --network resnet --num-layers 110 --batch-size 128 --gpus 0,1"
+    }
+  ]
+}
+
+账号列表：默认密码和用户名相同
+yuanpingbo
+changfeng
+liuchang
+pengyuan
+wurong
+chenqiuyao
+leizeling
+liwenbo
+xubenfeng
+mengjiaxiang
 
 
 ## Introduction
