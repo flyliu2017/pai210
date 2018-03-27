@@ -1,0 +1,21 @@
+{
+  "jobName": "{{jobName}}",
+  "image": "xwzheng/pai.run.mxnet:v1.0",
+
+  "dataDir": "hdfs://192.168.2.210:9000/data",
+
+  "outputDir": "hdfs://192.168.2.210:9000/output",
+
+  "codeDir": "hdfs://192.168.2.210:9000/code",
+
+  "taskRoles": [
+    {
+      "name": "ps_server",
+      "taskNumber": 1,
+      "cpuNumber": 2,
+      "memoryMB": 4096,
+      "gpuNumber": 2,
+      "command": "python incubator-mxnet/example/image-classification/train_cifar10.py --network resnet --num-layers 110 --batch-size 128 --gpus 0,1"
+    }
+  ]
+}
