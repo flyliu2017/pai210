@@ -14,7 +14,7 @@ Do everything in a docker container is recommended. So your should [install dock
 ### Note:
 - The host should have full network access to the pai cluster. 
 - Ubuntu 16.04 LTS is recommended. Though, theoretically, other distribution should be work well too. 
-- Prepare your [cluster-configuration](https://github.com/Microsoft/pai/blob/master/kubernetes-deployment/cluster-config-example.yaml) first.
+- Prepare your [cluster-configuration](http://192.168.16.70/LeiNao/pai/blob/pai_210/kubernetes-deployment/cluster-config.yaml) first.
 - Suggest to build the latest maintain-box every time you need to maintain your cluster. 
 
 ### Steps:
