@@ -85,6 +85,10 @@ docker run --name $docker_name \
   --security-opt apparmor:unconfined \
   --volume /var/drivers/nvidia/current:/usr/local/nvidia:ro \
   --volume /tmp/pai-root/alive/$APP_ID:/alive \
+  --volume /home/ftp/FtpUserHome/{{{ jobData.username }}}:/FtpHome\
+  --volume /home/ftp/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/tmp:/{{{ jobData.username }}}/{{{ jobData.jobName }}}/tmp \
+  --volume /home/ftp/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/finished:/{{{ jobData.username }}}/{{{ jobData.jobName }}}/finished \
+  -v /home/ftp/Container/$HADOOP_USER_NAME/$FRAMEWORK_NAME/DockerContainerScripts/{{{ idx }}}.sh:/root/bootstrap.sh \
   --label PAI_HOSTNAME="$(hostname)" \
   --label PAI_JOB_NAME={{{ jobData.jobName }}} \
   --label PAI_USER_NAME={{{ jobData.username }}} \
@@ -95,6 +99,7 @@ docker run --name $docker_name \
   --env PAI_TASK_INDEX=$TASK_INDEX \
   --env PAI_CONTAINER_HOST_IP=$CONTAINER_IP \
   --env PAI_CONTAINER_ID=$CONTAINER_ID \
+  --env FTP_HOME=/FtpHome \
   --entrypoint '/bin/bash' {{{ jobData.image }}} \
-  '-c' 'hdfs dfs -get {{{ hdfsUri }}}/Container/$HADOOP_USER_NAME/$FRAMEWORK_NAME/DockerContainerScripts/{{{ idx }}}.sh bootstrap.sh && /bin/bash bootstrap.sh' \
+  '-c' 'ls -l $FTP_HOME && id; echo name is $HADOOP_USER_NAME && echo finish get &&  ls -l; ls -l /root && cd /root && /bin/bash bootstrap.sh' \
   || exit 1

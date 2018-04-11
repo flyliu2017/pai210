@@ -12,10 +12,165 @@
   </div>
   <div class="box">
     <div class="box-body">
-      <p>An example config for distributed deep learning job:</p>
-      <code>
-        ${require('!!raw-loader!./job-submit.example.json').replace(/ /g, "&nbsp;").replace(/\n/g, "<br>")}
-      </code>
+
+      <form id="form1">
+        <div class="form-group">
+          <label>jobname:<span class="glyphicon glyphicon-question-sign"  data-toggle="tooltip"
+                                title="Jobname默认填写"></span></label>
+          <input name="jobName" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>image:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="默认填写"></span>
+          </label>
+          <input name="image" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>dataDir:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="默认填写"></span>
+          </label>
+          <input name="dataDir"type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>outputDir:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="默认填写"></span>
+          </label>
+          <input type="text" class="form-control" name="outputDir">
+        </div>
+        <div class="form-group">
+          <label>codeDir:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="默认填写"></span>
+          </label>
+          <input type="text" class="form-control" name="codeDir">
+        </div>
+
+
+        <div class="form-group">
+          <label>killAllOnCompletedTaskNumber:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="默认填写"></span>
+          </label>
+          <input type="text" class="form-control" name="killAllOnCompletedTaskNumber">
+        </div>
+        <div class="form-group">
+          <label>retryCount:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="默认填写"></span>
+          </label>
+          <input type="text" class="form-control" name="retryCount">
+        </div>
+
+        <div class="form-group" id="d" hidden>
+          <label>taskRoles</label>
+          <input type="text" class="form-control" name="taskRoles">
+        </div>
+
+        <div class="form-group" id="d">
+          <label>taskRoles:
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="默认填写"></span>
+          </label>
+        </div>
+
+        <table class="table table-striped form-group" id="Table1" >
+          <thead>
+          <tr>
+            <th name ="name">name</th>
+            <th name ="taskNumber">taskNumber</th>
+            <th name ="cpuNumber">cpuNumber</th>
+            <th name ="memoryMB">memoryMB</th>
+            <th name="gpuNumber">gpuNumber</th>
+            <th name="command">command</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><input type="text" name="name"></td>
+            <td><input type="text" name="taskNumber"></td>
+            <td><input type="text" name="cpuNumber"></td>
+            <td><input type="text" name="memoryMB"></td>
+            <td><input type="text" name="gpuNumber"></td>
+            <td><input type="text" name="command"></td>
+            <td><input type="button" value="删除" class="del btn-warning" /></td>
+          </tr>
+
+          <tr>
+            <td colspan="3">
+              <input type="button" value="添加" onclick="addRow()"class="btn btn-default btn-sm" /></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="form-group">
+          <button id="submit1" type="submit" class="btn btn-success btn-sm">提交</button>
+        </div>
+
+        <script type="text/javascript">
+            function $(eleStr){
+                switch(eleStr.substr(0,1)){
+                    case "#":
+                        return document.getElementById(eleStr.substr(1));
+                        break;
+                    case ".":
+                        return document.getElementsByClassName(eleStr.substr(1));
+                        break;
+                    case "_":
+                        return document.getElementsByName(eleStr.substr(1));
+                        break;
+                    default:
+                        return document.getElementsByTagName(eleStr);
+                        break;
+                }
+            }
+            onload = function(){
+                doOperator();
+            }
+
+            function doOperator(){
+
+                var updates =$(".update");
+                var dels =$(".del");
+                for (var i = 0; i < dels.length; i++) {
+                    dels[i].onclick =   function(){
+                        if(confirm("是否确定删除？")){  //提示是否删除
+                            //var row = this.parentNode.parentNode; //取到tr对象
+                            //row.parentNode.removeChild(row);  //移除tr
+                            $("#Table1").deleteRow(this.parentNode.parentNode.rowIndex);
+                        }
+                    }
+                }
+            }
+            function addRow(){
+                var rs = $("#Table1").rows;  //table取到所有的行
+                var insertR = $("#Table1").insertRow(rs.length-1); //给表格添加一行(不包单元格)
+                //insertR.innerHTML = rs[1].innerHTML;
+                var c1 = insertR.insertCell(0);
+                c1.innerHTML = '<input name="name" name="text_\'+i+\'" type="text" value=""  />';
+                var c2 = insertR.insertCell(1);
+                c2.innerHTML = '<input name="taskNumber" name="text_\'+i+\'" type="text" value=""  />';
+                var c3 = insertR.insertCell(2);
+                c3.innerHTML = '<input name="cpuNumber" name="text_\'+i+\'" type="text" value=""  />';
+                var c4 = insertR.insertCell(3);
+                c4.innerHTML = '<input name="memoryMB" name="text_\'+i+\'" type="text" value=""  />';
+                var c5 = insertR.insertCell(4);
+                c5.innerHTML = '<input name="gpuNumber" name="text_\'+i+\'" type="text" value=""  />';
+                var c6 = insertR.insertCell(5);
+                c6.innerHTML = '<input name="command" name="text_\'+i+\'" type="text" value=""  />';
+                var c7 = insertR.insertCell(6);
+                c7.innerHTML ='<input type="button" value="删除" class="del btn-warning"/ >';
+
+                doOperator();
+
+                var cs = rs[1].cells; //取到当前行的所有单元格
+                //alert(cs[1].innerHTML);
+            }
+
+
+        </script>
+
+      </form>
     </div>
   </div>
   <%= loading() %>

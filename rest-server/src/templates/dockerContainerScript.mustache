@@ -46,12 +46,13 @@ while /bin/true; do
 done &
 
 
-printf "%s %s\n%s\n\n" "[INFO]" "HADOOP CLASSPATH" "$(hadoop classpath --glob)"
+#printf "%s %s\n%s\n\n" "[INFO]" "HADOOP CLASSPATH" "$(hadoop classpath --glob)"
 
 export PAI_WORK_DIR="$(pwd)"
-export PAI_DEFAULT_FS_URI={{{ hdfsUri }}}
-HDFS_LAUNCHER_PREFIX=$PAI_DEFAULT_FS_URI/Container
-export CLASSPATH="$(hadoop classpath --glob)"
+#export PAI_DEFAULT_FS_URI={{{ hdfsUri }}}
+#HDFS_LAUNCHER_PREFIX=$PAI_DEFAULT_FS_URI/Container
+HDFS_LAUNCHER_PREFIX=""
+#export CLASSPATH="$(hadoop classpath --glob)"
 
 export PAI_JOB_NAME={{{ jobData.jobName }}}
 export PAI_USER_NAME={{{ jobData.username }}}
@@ -98,16 +99,23 @@ task_role_no={{{ idx }}}
 # Touch a container id file in "APP_ID-TASK_ROLE_NO-TASK_INDEX-CONTAINER_HOST_IP-CONTAINER_HOST_PORT" format on hdfs
 # To communicate with other containers, add APP_ID as prefix to differentiate attempts with same job name
 hdfs dfs -touchz $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT || exit 1
-while [ `hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ | grep "/$PAI_JOB_NAME/tmp/$APP_ID-" | wc -l` -lt  $PAI_JOB_TASK_COUNT ]; do
+#while [ `hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ | grep "/$PAI_JOB_NAME/tmp/$APP_ID-" | wc -l` -lt  $PAI_JOB_TASK_COUNT ]; do
+ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/
+while [ `ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ | grep "$APP_ID-" | wc -l` -lt  $PAI_JOB_TASK_COUNT ]; do
   printf "%s %s\n" "[INFO]" "Waiting for other containers ..."
   sleep 10
 done
-hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ \
-  | grep "/$PAI_JOB_NAME/tmp/$APP_ID-" \
+#hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ \
+ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ \
+  | grep "$APP_ID-" \
   | grep -oE "[^/]+$" \
   | sed -e "s/^$APP_ID-//g" \
   | sort -n -k 2 -t"-" \
   > ContainerList
+
+echo cat ContainerList
+cat ContainerList
+
 if [ "$(cat ContainerList | wc -l)" -ne $PAI_JOB_TASK_COUNT ]; then
   printf "%s %s\n%s\n%s\n\n" \
     "[ERROR]" "ContainerList" \
@@ -127,9 +135,11 @@ rm ContainerList
 
 printf "%s %s\n%s\n\n" "[INFO]" "ENV" "$(printenv | sort)"
 
-if [[ -n $PAI_CODE_DIR ]]; then
-  hdfs dfs -get $PAI_CODE_DIR || exit 1
-fi
+#if [[ -n $PAI_CODE_DIR ]]; then
+ # hdfs dfs -get $PAI_CODE_DIR || exit 1
+#fi
+
+umask 000
 
 # Backward compatibility
 export PAI_USERNAME=$PAI_USER_NAME
@@ -217,8 +227,18 @@ printf "%s %s\n\n" "[INFO]" "USER COMMAND START"
 printf "\n%s %s\n\n" "[INFO]" "USER COMMAND END"
 
 {{# jobData.killAllOnCompletedTaskNumber }}
-hdfs dfs -touchz $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX || exit 1
-while [ `hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/ | grep "/$PAI_JOB_NAME/finished/$APP_ID-" | wc -l` -lt  $PAI_KILL_ALL_ON_COMPLETED_TASK_NUM ]; do
+if [ -f $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX ]
+then
+    echo $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX existed exitng now
+    exit 1
+else
+   echo createing $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX
+   touch $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX || exit 1
+fi
+#hdfs dfs -touchz $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/$APP_ID-$PAI_TASK_INDEX || exit 1
+#while [ `hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/ | grep "/$PAI_JOB_NAME/finished/$APP_ID-" | wc -l` -lt  $PAI_KILL_ALL_ON_COMPLETED_TASK_NUM ]; do
+ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/
+while [ `ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/finished/ | grep "$APP_ID-" | wc -l` -lt  $PAI_KILL_ALL_ON_COMPLETED_TASK_NUM ]; do
   sleep 10
 done
 {{/ jobData.killAllOnCompletedTaskNumber }}

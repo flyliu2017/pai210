@@ -18,6 +18,7 @@
 // module dependencies
 const userModel = require('../models/user');
 const logger = require('../config/logger');
+const subProcess = require('child_process');
 
 /**
  * Create / update a user.
@@ -38,6 +39,16 @@ const update = (req, res) => {
           message: 'update failed',
         });
       } else {
+       let ftpConfig ={
+    	    ftpServiceUri : process.env.FTPSERVICE_URI,
+    	  };
+      subProcess.exec(
+      `curl ${ftpConfig.ftpServiceUri}/?username=${username}'&'password=${password}`,
+      (err, stdout, stderr) => {
+    	  if (err) {
+    	    logger.warn('create ftp user error for username %s\n%s',  username, err.stack);
+    	   }
+       });	
         return res.status(201).json({
           message: 'update successfully',
         });
