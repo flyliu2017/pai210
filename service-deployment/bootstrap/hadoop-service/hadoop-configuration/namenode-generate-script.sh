@@ -18,5 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 cp  /hadoop-configuration/namenode-hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
+cp  /hadoop-configuration/core-site.xml $HADOOP_CONF_DIR/core-site.xml
 
 sed -i "s/{HDFS_ADDRESS}/${HDFS_ADDRESS}/g" $HADOOP_CONF_DIR/core-site.xml 
