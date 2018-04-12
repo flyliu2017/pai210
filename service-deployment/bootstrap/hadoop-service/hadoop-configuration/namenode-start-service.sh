@@ -25,5 +25,7 @@ fi
 
 # Set the INFRA_IP in kubernete's yaml file.
 
+# waiting 30s to start portmap and nfs3
+sleep 30 && $HADOOP_PREFIX/sbin/hadoop-daemon.sh --script $HADOOP_PREFIX/bin/hdfs start portmap && $HADOOP_PREFIX/sbin/hadoop-daemon.sh --script $HADOOP_PREFIX/bin/hdfs start nfs3 &
 
 $HADOOP_HDFS_HOME/bin/hdfs namenode
