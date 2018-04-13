@@ -71,14 +71,18 @@ class Job {
     return jobState;
   }
 
-  getJobList(next) {
+  getJobList(req, next) {
     unirest.get(launcherConfig.frameworksPath())
       .headers(launcherConfig.webserviceRequestHeaders)
       .end((res) => {
         try {
           const resJson = typeof res.body === 'object' ?
               res.body : JSON.parse(res.body);
-          const jobList = resJson.summarizedFrameworkInfos.map((frameworkInfo) => {
+          //const jobList; 
+            const jobListForUser = resJson.summarizedFrameworkInfos.filter((frameworkInfo) => {
+                return (req.user.username == frameworkInfo.userName || req.user.admin == true);
+              });
+            const jobList = jobListForUser.map((frameworkInfo) => {
             let retries = 0;
             ['transientNormalRetriedCount', 'transientConflictRetriedCount',
                 'nonTransientRetriedCount', 'unKnownRetriedCount'].forEach((retry) => {

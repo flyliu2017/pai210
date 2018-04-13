@@ -54,6 +54,8 @@ spec:
           value: {{ clusterinfo['restserverinfo']['lowdb_admin'] }}
         - name: LOWDB_PASSWD
           value: {{ clusterinfo['restserverinfo']['lowdb_passwd'] }}
+        - name: FTPSERVICE_URI
+          value: {{ clusterinfo['restserverinfo']['ftpservice_uri'] }}
         ports:
         - name: rest-server
           containerPort: 8080

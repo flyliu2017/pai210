@@ -57,7 +57,7 @@ const load = (req, res, next, jobName) => {
  * Get list of jobs.
  */
 const list = (req, res) => {
-  Job.prototype.getJobList((jobList, err) => {
+  Job.prototype.getJobList(req, (jobList, err) => {
     if (err) {
       logger.warn('list jobs error\n%s', err.stack);
       return res.status(500).json({
@@ -70,7 +70,13 @@ const list = (req, res) => {
         error: 'JobListNotFound',
         message: 'could not find job list',
       });
-    } else {
+    } else if(jobList.length === 0){
+        logger.warn('user %s has no match job list', req.user.username);
+        return res.status(500).json({
+          error: 'UserHasNoJobList',
+          message: 'could not find job list',
+        });
+    }else {
       return res.status(200).json(jobList);
     }
   });
@@ -80,7 +86,15 @@ const list = (req, res) => {
  * Get job status.
  */
 const get = (req, res) => {
-  return res.json(req.job);
+  if (req.user.admin == false && req.job.jobStatus.username !== req.user.username){
+      logger.warn('not match usernames, request username %s, get job username %s', req.job.jobStatus.username, req.user.username);
+      return res.status(400).json({
+        error: 'notMatchUsernames',
+        message: 'not match usernames',
+      });
+    } else{
+      return res.json(req.job);
+    }
 };
 
 /**

@@ -28,11 +28,11 @@ const router = new express.Router();
 
 router.route('/')
     /** GET /api/v1/jobs - Get list of jobs */
-    .get(jobController.list);
+    .get(tokenConfig.check, jobController.list);
 
 router.route('/:jobName')
     /** GET /api/v1/jobs/:jobName - Get job status */
-    .get(jobController.get)
+    .get(tokenConfig.check, jobController.get)
 
     /** PUT /api/v1/jobs/:jobName - Update job */
     .put(tokenConfig.check, param.validate(jobConfig.schema), jobController.update)

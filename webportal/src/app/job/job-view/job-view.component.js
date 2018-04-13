@@ -136,10 +136,14 @@ const convertGpu = (gpuAttribute) => {
 };
 
 const loadJobs = () => {
+  userAuth.checkToken((token) => {
   loading.showLoading();
   $.ajax({
     url: `${webportalConfig.restServerUri}/api/v1/jobs`,
     type: 'GET',
+    headers: {
+          Authorization: `Bearer ${token}`,
+        },
     success: (data) => {
       if (data.error) {
         alert(data.message);
@@ -196,10 +200,14 @@ const stopJob = (jobName) => {
 };
 
 const loadJobDetail = (jobName) => {
+  userAuth.checkToken((token) => {
   loading.showLoading();
-  $.ajax({
+    $.ajax({
     url: `${webportalConfig.restServerUri}/api/v1/jobs/${jobName}`,
     type: 'GET',
+    headers: {
+          Authorization: `Bearer ${token}`,
+        },
     success: (data) => {
       loading.hideLoading();
       if (data.error) {
@@ -218,6 +226,7 @@ const loadJobDetail = (jobName) => {
       const res = JSON.parse(xhr.responseText);
       alert(res.message);
     },
+    });
   });
 };
 

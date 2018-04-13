@@ -96,9 +96,18 @@ printf "%s %s\n" \
 export PAI_CONTAINER_SSH_PORT=${PAI_CONTAINER_SSH_PORT}
 
 task_role_no={{{ idx }}}
-# Touch a container id file in "APP_ID-TASK_ROLE_NO-TASK_INDEX-CONTAINER_HOST_IP-CONTAINER_HOST_PORT" format on hdfs
-# To communicate with other containers, add APP_ID as prefix to differentiate attempts with same job name
-hdfs dfs -touchz $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT || exit 1
+# touch a container id file in "APP_ID-TASK_ROLE_NO-TASK_INDEX-CONTAINER_HOST_IP-CONTAINER_HOST_PORT" format on hdfs
+# to communicate with other containers, add APP_ID as prefix to differentiate attempts with same job name
+#hdfs dfs -touchz $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT || exit 1
+if [ -f $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT ]
+then 
+    echo $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT existed, exiting now
+    exit 1
+else
+    echo creating $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT
+    touch $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/$APP_ID-$task_role_no-$PAI_TASK_INDEX-$PAI_CONTAINER_HOST_IP-$PAI_CONTAINER_HOST_PORT || exit 1
+fi
+
 #while [ `hdfs dfs -ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ | grep "/$PAI_JOB_NAME/tmp/$APP_ID-" | wc -l` -lt  $PAI_JOB_TASK_COUNT ]; do
 ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/
 while [ `ls $HDFS_LAUNCHER_PREFIX/$PAI_USER_NAME/$PAI_JOB_NAME/tmp/ | grep "$APP_ID-" | wc -l` -lt  $PAI_JOB_TASK_COUNT ]; do
