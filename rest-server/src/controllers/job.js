@@ -22,6 +22,7 @@ const logger = require('../config/logger');
 /**
  * Load job and append to req.
  */
+/*
 const load = (req, res, next, jobName) => {
   new Job(jobName, (job, error) => {
     if (!error) {
@@ -52,7 +53,41 @@ const load = (req, res, next, jobName) => {
     }
   });
 };
+*/
 
+const load = (req, res, next, jobName) => {
+	  logger.info('loading job %s', jobName);
+	  new Job(jobName, (job, error) => {
+	    if (error) {
+	      if (error.message === 'JobNotFound') {
+	        if (req.method !== 'PUT') {
+	          logger.warn('load job %s error, could not find job', jobName);
+	          return res.status(404).json({
+	            error: 'JobNotFound',
+	            message: `could not find job ${jobName}`,
+	          });
+	        }
+	      } else {
+	        logger.warn('internal server error');
+	        return res.status(500).json({
+	          error: 'InternalServerError',
+	          message: 'internal server error',
+	        });
+	      }
+	    } else {
+	      if (job.jobStatus.state !== 'JOB_NOT_FOUND' && req.method === 'PUT' && req.path === `/${jobName}`) {
+	        logger.warn('duplicate job %s', jobName);
+	        return res.status(400).json({
+	          error: 'DuplicateJobSubmission',
+	          message: `job already exists: '${jobName}'`,
+	        });
+	      }
+	    }
+	    req.job = job;
+	    return next();
+	  });
+	};
+	
 /**
  * Get list of jobs.
  */

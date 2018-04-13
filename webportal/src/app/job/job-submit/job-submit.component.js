@@ -150,6 +150,18 @@ function disappear(){
         console.log(JSON.stringify(data).serializeObject());
     });*/
 
+$(document).ready(() => {
+  $(document).on('change', '#file', (event) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const jobConfig = event.target.result;
+      if (isValidJson(jobConfig)) {
+        submitJob(JSON.parse(jobConfig));
+      }
+    };
+    reader.readAsText(event.target.files[0]);
+  });
+});
 
 
 
