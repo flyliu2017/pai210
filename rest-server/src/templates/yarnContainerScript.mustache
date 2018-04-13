@@ -29,8 +29,10 @@ function exit_handler()
     "[ERROR]" "EXIT signal received in yarn container, exiting ..."
   set +x
   exec 13>&-
-  hdfs dfs -put /tmp/pai_yarncontainer_$CONTAINER_ID.log \
-    {{{ hdfsUri }}}/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/log/
+  # hdfs dfs -put /tmp/pai_yarncontainer_$CONTAINER_ID.log \
+  #  {{{ hdfsUri }}}/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/log/
+  mkdir -p /home/ftp/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/log/
+  cp /tmp/pai_yarncontainer_$CONTAINER_ID.log  /home/ftp/Container/{{{ jobData.username }}}/{{{ jobData.jobName }}}/log/
   kill 0
 }
 

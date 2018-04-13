@@ -61,19 +61,19 @@ clusterinfo:
     custom_hadoop_binary_path: /home/ubuntu/hadoop-2.7.2.tar.gz
     hadoopversion: 2.7.2
     configmapname: hadoop-configuration
-    hadoop_vip: 192.168.2.210
+    hadoop_vip: 192.168.2.216
 
   frameworklauncher:
-    frameworklauncher_vip: 192.168.2.210
+    frameworklauncher_vip: 192.168.2.216
     frameworklauncher_port: 9086
 
   restserverinfo:
     # path for rest api server src dir
     src_path: ../rest-server/
     # uri for frameworklauncher webservice
-    webservice_uri: http://192.168.2.210:9086
+    webservice_uri: http://192.168.2.216:9086
     # uri for hdfs
-    hdfs_uri: hdfs://192.168.2.210:9000
+    hdfs_uri: hdfs://192.168.2.216:9000
     # port for rest api server
     server_port: 9186
     # secret for signing authentication tokens, e.g., "Hello PAI!"
@@ -84,34 +84,35 @@ clusterinfo:
     lowdb_admin: cluster_admin
     # database admin password
     lowdb_passwd: cluster_admin
-    ftpservice_uri: http://192.168.2.215:5001
+    ftpservice_uri: http://192.168.2.216:5001
+    webhdfs_uri: http://192.168.2.216:50070
 
   # The config for web portal
   webportalinfo:
     # root url of the rest server
-    rest_server_uri: http://192.168.2.210:9186
+    rest_server_uri: http://192.168.2.216:9186
     # root url of the prometheus server
-    prometheus_uri: http://192.168.2.211:9090
+    prometheus_uri: http://192.168.6.105:9090
     # root url of the grafana portal
-    grafana_uri: http://192.168.2.210:3000
+    grafana_uri: http://192.168.2.216:3000
     # root url of the k8s dashboard
-    k8s_dashboard_uri: http://192.168.2.210:9090
+    k8s_dashboard_uri: http://192.168.2.216:9090
     # root url of the k8s apiserver
-    k8s_api_server_uri: http://192.168.2.210:8080
+    k8s_api_server_uri: http://192.168.2.216:8080
     # port for webportal
     server_port: 9286
 
   # The config for Grafana
   grafanainfo:  
     # The address of the grafana to connect to
-    grafana_url: http://192.168.2.210
+    grafana_url: http://192.168.2.216
     # port for grafana
     grafana_port: 3000
 
   # The config for monitor service
   prometheusinfo:
     # The address of the prometheus to connect to
-    prometheus_url: http://192.168.2.211
+    prometheus_url: http://192.168.6.105
     # port for prometheus port
     prometheus_port: 9090
     # port for node exporter
@@ -121,21 +122,21 @@ clusterinfo:
 
   pyloninfo:
     # root url of the rest server
-    rest_server_uri: http://192.168.2.210:9186
+    rest_server_uri: http://192.168.2.216:9186
     # root url of the k8s apiserver
-    k8s_api_server_uri: http://192.168.2.210:8080
+    k8s_api_server_uri: http://192.168.2.216:8080
     # root url of the webhdfs api server
-    webhdfs_uri: http://192.168.2.210:50070
+    webhdfs_uri: http://192.168.2.216:50070
     # root url of the prometheus server
-    prometheus_uri: http://192.168.2.211:9090
+    prometheus_uri: http://192.168.6.105:9090
     # root url of the k8s dashboard
-    k8s_dashboard_uri: http://192.168.2.210:9090
+    k8s_dashboard_uri: http://192.168.2.216:9090
     # root url of grafana
-    grafana_uri: http://192.168.2.210:3000
+    grafana_uri: http://192.168.2.216:3000
     # root url of the web portal
-    webportal_uri: http://192.168.2.210:9286
+    webportal_uri: http://192.168.2.216:9286
     # port of pylon
-    port: 80
+    port: 81
 # The detail machine type information in your cluster, each machine type has an entry here
 # An Azure VM example
 machineinfo:
@@ -177,13 +178,13 @@ machineinfo:
 # An example
 machinelist:
   # Replace your own hostname here.
-  cpu210:
+  cpu216:
     # recommend to be the same as host IP
-    nodename: 192.168.2.210
+    nodename: 192.168.2.216
     # Replace your own machine type here
     machinetype: D8SV3 
     # Replace your own IP here.
-    ip: 192.168.2.210
+    ip: 192.168.2.216
     # all hadooprole: master will install zk, please specify a unique zkid for each node. Begin at "1".
     zkid: "1"
     # hdfsrole:   master or worker
@@ -199,57 +200,15 @@ machinelist:
     launcher: "true"
     restserver: "true"
     webportal: "true"
-    #prometheus: "true"
     grafana: "true"
     pylon: "true"
-    node-expoter: "true"
+    node-exporter: "true"
  
-  # Do the same work as the machine above.
-  gpu102:
-    nodename: 192.168.6.102
-    machinetype: NC24R4
-    ip: 192.168.6.102
-    hdfsrole: worker
-    yarnrole: worker
-    node-exporter: "true"
-  # Do the same work as the machine above.
-  gpu103:
-    nodename: 192.168.6.103
+  gpu105:
+    nodename: 192.168.6.105
     machinetype: NC24R8
-    ip: 192.168.6.103
+    ip: 192.168.6.105
     hdfsrole: worker
     yarnrole: worker
-    node-exporter: "true"
-  # Do the same work as the machine above.
-  gpu104:
-    nodename: 192.168.6.104
-    machinetype: NC24R8
-    ip: 192.168.6.104
-    hdfsrole: worker
-    yarnrole: worker
-    node-exporter: "true"
-  cpu211:
-    nodename: 192.168.2.211
-    machinetype: D8SV3
-    ip: 192.168.2.211
-    hdfsrole: worker
     prometheus: "true"
-    node-exporter: "true"
-  cpu212:
-    nodename: 192.168.2.212
-    machinetype: D8SV3
-    ip: 192.168.2.212
-    hdfsrole: worker
-    node-exporter: "true"
-  cpu213:
-    nodename: 192.168.2.213
-    machinetype: D8SV3
-    ip: 192.168.2.213
-    hdfsrole: worker
-    node-exporter: "true"
-  cpu214:
-    nodename: 192.168.2.214
-    machinetype: D8SV3
-    ip: 192.168.2.214
-    hdfsrole: worker
     node-exporter: "true"
