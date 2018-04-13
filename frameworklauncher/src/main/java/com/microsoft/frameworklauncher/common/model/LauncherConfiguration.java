@@ -31,8 +31,8 @@ public class LauncherConfiguration implements Serializable {
   private Set<UserDescriptor> rootAdminUsers = new HashSet<>();
 
   // Service Setup
-  private Integer serviceRMResyncIntervalSec = 60;
-  private Integer serviceRequestPullIntervalSec = 30;
+  private Integer serviceRMResyncIntervalSec = 20;
+  private Integer serviceRequestPullIntervalSec = 5;
 
   // Application Setup
   private Integer applicationRetrieveDiagnosticsRetryIntervalSec = 60;
