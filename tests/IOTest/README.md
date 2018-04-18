@@ -4,7 +4,7 @@
 ## 测试步骤
 - 执行脚本  storage_performance_test.sh
 ```
-storage_performance_test.sh -d scriptdir -o outputdir
+storage_performance_test.sh -d configdir -o outputdir
 ```
 执行 `storage_performance_test.sh -h` 可以查看脚本执行帮助
 
@@ -15,7 +15,7 @@ storage_performane_test.sh options
                be written into this director
 ```
 其中 `-d` 表示fio配置脚本所在的目录, `-o`表示将fio命令生成的结果写入的目录
-脚本会依次执行`scriptdir`目录中的所有配置脚本
+脚本会依次执行`configdir`目录中的所有配置脚本
 - fio配置脚本介绍
 在script_sample目录中有示例,详细介绍请参见[fio pdf文档](https://media.readthedocs.org/pdf/fio/latest/fio.pdf)
 
