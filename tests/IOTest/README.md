@@ -45,7 +45,7 @@ filename=/home/ustc/test/test_rw_randread
 #测试的读写模式:read,write, randread, randwrite, randrw
 rw=randread
 ```
-`filename=/home/ustc/test/test_rw_randread`filename中指定的目录所在文件系统即为要测试的文件系统
+`filename=/home/ustc/test/test_rw_randread`filename中指定的目录所在文件系统即为要测试的文件系统    
 **如若要测试某个NFS系统,需要先将NFS挂载到本地目录如/home/ustc/test/,然后针对/home/ustc/test/进行fio测试**
 
 - 输出结果含义
