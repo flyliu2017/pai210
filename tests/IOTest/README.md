@@ -1,4 +1,4 @@
-#利用Fio工具进行IO测试
+# 利用Fio工具进行IO测试
 [fio 工具](https://media.readthedocs.org/pdf/fio/latest/fio.pdf)可以测试文件系统读写的 bw, iops, latency
 本脚本利用Fio命令进行文件系统IO的自动化测试
 ## 测试步骤
