@@ -1,0 +1,11 @@
+before_script:
+  - echo before job
+
+rspec:
+  script:
+    -echo job rspec
+
+rubocop:
+  script:
+    - echo job rubocop
+
