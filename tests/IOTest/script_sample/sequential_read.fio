@@ -1,0 +1,15 @@
+[global]
+ioengine=libaio
+direct=1
+bs=4k
+size=512m
+#directory=/home/ustc/test
+numjobs=10
+group_reporting=1
+runtime=120
+iodepth=32
+
+[job_sequential_read]
+filename=/home/ustc/test/test_rw_read
+rw=read
+
