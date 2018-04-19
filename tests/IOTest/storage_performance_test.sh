@@ -27,7 +27,7 @@ do
         -h|--help)
             cat <<EOF
             storage_performane_test.sh options
-            -d,--dir       director containing .fio script 
+            -d,--dir       director containing .fio config files 
             -o,--output    files produced by fio command will 
                            be written into this director
 EOF
