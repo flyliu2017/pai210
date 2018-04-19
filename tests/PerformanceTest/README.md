@@ -11,7 +11,8 @@ DaemonSet使用了新镜像`192.168.2.212:5000/leinao/gpu-test`，该镜像编�
 编写了脚本[performance-test.sh](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/performance-test.sh)和[gpu-test.py](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/gpu-test.sh)用于启动测试。
 
 
-**`batchCUBLAS`、`bandwidthTest`和`performance-test.sh`需要放在nfs目录中（假设该目录路径为`SCRIPTS_PATH`），该目录会以volumn形式挂载到容器中，如果要使用其他目录，在`gpu-test.yaml`最后一行进行相应修改**
+**`batchCUBLAS`、`bandwidthTest`和`performance-test.sh`需要放在nfs目录中（假设该目录路径为`SCRIPTS_PATH`），**  
+**该目录会以volumn形式挂载到容器中，如果要使用其他目录，在`gpu-test.yaml`最后一行进行相应修改**
 
 
 ## 启动测试
@@ -24,14 +25,17 @@ python gpu-test.py --data_dir=/path/to/yaml
 
 **注意：如果gpu上有其他任务运行会严重影响测试结果**
 
-测试工作大概需要几分钟，完成后，会在`SCRIPTS_PATH`目录下生成`$HOSTNAME-test-result.txt`文件，里面保存了`$HOSTNAME`主机上所有gpu卡的测试结果。
+测试工作大概需要几分钟，完成后，会在`SCRIPTS_PATH`目录下生成`$HOSTNAME-test-result.txt`文件，   
+里面保存了`$HOSTNAME`主机上所有gpu卡的测试结果。
 
 ## 结果示例
 
-该结果是在`192.168.2.216`集群上测试得到的，也就是`gpu105`上4块卡8个gpu的测试结果，以下是gpu0的结果展示，完整文件可以查看`gpu105-test-result.txt`。
+该结果是在`192.168.2.216`集群上测试得到的，也就是`gpu105`上4块卡8个gpu的测试结果，  
+以下是gpu0的结果展示，完整文件可以查看`gpu105-test-result.txt`。
 
 
-算力测试，其中sgemm和dgemm分别对应单精度和双精度：
+算力测试，其中sgemm和dgemm分别对应单精度和双精度,测试了四种模式，一般而言，  
+`Running N=100 with streams`的结果是最快的：
 
 
 ```
