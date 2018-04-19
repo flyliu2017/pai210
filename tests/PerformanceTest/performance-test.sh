@@ -16,3 +16,4 @@ do
     let "i++"
 done | tee test-result.txt
 
+while true;do sleep 1000; done
