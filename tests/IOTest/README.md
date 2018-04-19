@@ -68,6 +68,12 @@ hdfsIoTest.sh -h
 -o 指示IO测试结果存放的位置
 -p 指示 hdfs pod 的名称,可以 通过 kubectl get pods 命令查看
 ```
+command.txt示例内容
+```
+TestDFSIO -write -nrFiles 10 -fileSize 10MB
+TestDFSIO -read -nrFiles 10 -fileSize 10MB
+```
+`nrFiles`表示文件个数,`fileSize`表示文件大小
 如果出现以下错误
 ```
 INFO ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8032. Already tried 0 time(s);
