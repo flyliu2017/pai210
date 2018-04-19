@@ -1,0 +1,5 @@
+FROM 192.168.2.212:5000/leinao/drivers
+
+COPY start.sh /root
+
+CMD /root/start.sh
