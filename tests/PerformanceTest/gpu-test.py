@@ -32,7 +32,7 @@ def shell_no_exit(shell_cmd):
 
 
 
-cmd="kubectl delete job gpu-test"
+cmd="kubectl delete ds gpu-test"
 
 shell_no_exit(cmd)
 
