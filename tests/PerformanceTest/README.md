@@ -4,9 +4,11 @@
 
 测试中使用了cuda8.0中自带的sample：`batchCUBLAS`和`bandwidthTest`，分别对应算力和带宽的测试。
 
-为了能够方便快捷地对集群中所有gpu进行测试，可以通过yaml文件`gpu-test.yaml`在集群上创建DaemonSet完成测试任务。
+为了能够方便快捷地对集群中所有gpu进行测试，可以通过yaml文件[gpu-test.yaml](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/gpu-test.yaml)在集群上创建DaemonSet完成测试任务。
 
-DaemonSet使用了新镜像`192.168.2.212:5000/leinao/gpu-test`，该镜像编译使用了`dockerfile`和`start.sh`,调用了脚本`performance-test.sh`和`gpu-test.py`。
+DaemonSet使用了新镜像`192.168.2.212:5000/leinao/gpu-test`，该镜像编译使用了[dockerfile](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/dockerfile)和[start.sh](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/start.sh).
+
+编写了脚本[performance-test.sh](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/performance-test.sh)和[gpu-test.py](http://192.168.16.70/liuchang/pai210/blob/master/tests/PerformanceTest/gpu-test.sh)用于启动测试。
 
 
 **`batchCUBLAS`、`bandwidthTest`和`performance-test.sh`需要放在nfs目录中（假设该目录路径为`SCRIPTS_PATH`），该目录会以volumn形式挂载到容器中，如果要使用其他目录，在`gpu-test.yaml`最后一行进行相应修改**
