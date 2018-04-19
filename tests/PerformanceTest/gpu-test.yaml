@@ -16,7 +16,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 apiVersion: batch/v1
-kind: Job
+kind: DaemonSet
 metadata:
   name: gpu-test
 spec:
@@ -29,7 +29,6 @@ spec:
       hostPID: true
       nodeSelector:
         machinetype: gpu
-      restartPolicy: Never
       containers:
       - name: gputest
         image: 192.168.2.212:5000/leinao/gpu-test:latest
