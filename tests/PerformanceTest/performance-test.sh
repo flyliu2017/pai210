@@ -6,6 +6,7 @@
 nvidia-smi -L
 
 gpunum=$(nvidia-smi -L|wc -l)
+hostname=$(hostname)
 
 i=0
 while [ $i -lt $gpunum ]
@@ -14,6 +15,6 @@ do
     echo -e "\n"
     ./bandwidthTest --device=$i
     let "i++"
-done | tee test-result.txt
+done | tee ${hostname}-test-result.txt
 
 while true;do sleep 1000; done
