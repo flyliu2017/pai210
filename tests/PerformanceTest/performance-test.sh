@@ -7,6 +7,16 @@
 gpunum=$(nvidia-smi -L|wc -l)
 hostname=$(hostname)
 
+if [ -e ${hostname}-test-result.txt ]
+then
+	rm ${hostname}-test-result.txt
+fi
+
+if [ -e ${hostname}-simplified-result.txt ]
+then
+	rm ${hostname}-simplified-result.txt
+fi
+
 nvidia-smi -L | tee ${hostname}-simplified-result.txt
 
 i=0

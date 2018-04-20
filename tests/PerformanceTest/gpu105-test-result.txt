@@ -7,12 +7,12 @@ gpuDeviceInit() CUDA Device [0]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00249505 sec  GFLOPS=2904.85
+^^^^ elapsed = 0.00248814 sec  GFLOPS=2912.93
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00613093 sec  GFLOPS=1182.16
+^^^^ elapsed = 0.00615883 sec  GFLOPS=1176.81
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -20,12 +20,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.23902488 sec  GFLOPS=3032.22
+^^^^ elapsed = 0.23630214 sec  GFLOPS=3067.16
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61715102 sec  GFLOPS=1174.39
+^^^^ elapsed = 0.61543202 sec  GFLOPS=1177.67
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -33,12 +33,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.22393298 sec  GFLOPS=3236.57
+^^^^ elapsed = 0.22371888 sec  GFLOPS=3239.67
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.58627105 sec  GFLOPS=1236.25
+^^^^ elapsed = 0.58006406 sec  GFLOPS=1249.48
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -46,12 +46,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.57041502 sec  GFLOPS=1270.61
+^^^^ elapsed = 0.56960893 sec  GFLOPS=1272.41
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.73329496 sec  GFLOPS=418.149
+^^^^ elapsed = 1.73734403 sec  GFLOPS=417.175
 @@@@ dgemm test OK
 
 Test Summary
@@ -67,17 +67,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11324.0
+   33554432			11323.9
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11301.4
+   33554432			11323.3
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			170210.1
+   33554432			170225.6
 
 Result = PASS
 
@@ -91,12 +91,12 @@ gpuDeviceInit() CUDA Device [1]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00379801 sec  GFLOPS=1908.3
+^^^^ elapsed = 0.00380707 sec  GFLOPS=1903.76
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00938416 sec  GFLOPS=772.34
+^^^^ elapsed = 0.00938082 sec  GFLOPS=772.615
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -104,12 +104,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.28717208 sec  GFLOPS=2523.84
+^^^^ elapsed = 0.27803802 sec  GFLOPS=2606.75
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.63355613 sec  GFLOPS=1143.98
+^^^^ elapsed = 0.63440704 sec  GFLOPS=1142.45
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -117,12 +117,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.22963595 sec  GFLOPS=3156.19
+^^^^ elapsed = 0.23132801 sec  GFLOPS=3133.11
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.60889912 sec  GFLOPS=1190.31
+^^^^ elapsed = 0.60555291 sec  GFLOPS=1196.88
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -130,12 +130,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.60600519 sec  GFLOPS=1195.99
+^^^^ elapsed = 0.60621190 sec  GFLOPS=1195.58
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.83720493 sec  GFLOPS=394.499
+^^^^ elapsed = 1.84072804 sec  GFLOPS=393.744
 @@@@ dgemm test OK
 
 Test Summary
@@ -151,17 +151,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11323.7
+   33554432			11355.3
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11308.5
+   33554432			11306.1
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			170060.3
+   33554432			170015.9
 
 Result = PASS
 
@@ -175,12 +175,12 @@ gpuDeviceInit() CUDA Device [2]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00380611 sec  GFLOPS=1904.24
+^^^^ elapsed = 0.00379419 sec  GFLOPS=1910.22
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00943208 sec  GFLOPS=768.416
+^^^^ elapsed = 0.00941706 sec  GFLOPS=769.641
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -188,12 +188,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.26750708 sec  GFLOPS=2709.37
+^^^^ elapsed = 0.27429414 sec  GFLOPS=2642.33
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61013818 sec  GFLOPS=1187.89
+^^^^ elapsed = 0.60852504 sec  GFLOPS=1191.04
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -201,12 +201,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.22197008 sec  GFLOPS=3265.2
+^^^^ elapsed = 0.22280097 sec  GFLOPS=3253.02
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.57888293 sec  GFLOPS=1252.02
+^^^^ elapsed = 0.58564210 sec  GFLOPS=1237.57
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -214,12 +214,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.56844282 sec  GFLOPS=1275.02
+^^^^ elapsed = 0.57074499 sec  GFLOPS=1269.88
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.73313594 sec  GFLOPS=418.187
+^^^^ elapsed = 1.75187683 sec  GFLOPS=413.714
 @@@@ dgemm test OK
 
 Test Summary
@@ -235,17 +235,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11313.7
+   33554432			11335.9
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11307.5
+   33554432			11336.3
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			170087.1
+   33554432			170199.6
 
 Result = PASS
 
@@ -259,12 +259,12 @@ gpuDeviceInit() CUDA Device [3]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00381684 sec  GFLOPS=1898.89
+^^^^ elapsed = 0.00384688 sec  GFLOPS=1884.06
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00955391 sec  GFLOPS=758.617
+^^^^ elapsed = 0.00956988 sec  GFLOPS=757.351
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -272,12 +272,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.27662206 sec  GFLOPS=2620.09
+^^^^ elapsed = 0.27430391 sec  GFLOPS=2642.24
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.63796616 sec  GFLOPS=1136.07
+^^^^ elapsed = 0.63972616 sec  GFLOPS=1132.95
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -285,12 +285,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.23213005 sec  GFLOPS=3122.28
+^^^^ elapsed = 0.23082089 sec  GFLOPS=3139.99
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61168098 sec  GFLOPS=1184.89
+^^^^ elapsed = 0.60987711 sec  GFLOPS=1188.4
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -298,12 +298,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61215901 sec  GFLOPS=1183.97
+^^^^ elapsed = 0.61535001 sec  GFLOPS=1177.83
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.85919499 sec  GFLOPS=389.833
+^^^^ elapsed = 1.86700201 sec  GFLOPS=388.203
 @@@@ dgemm test OK
 
 Test Summary
@@ -319,17 +319,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11330.3
+   33554432			11332.2
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11290.2
+   33554432			11338.4
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			170065.9
+   33554432			170038.7
 
 Result = PASS
 
@@ -343,12 +343,12 @@ gpuDeviceInit() CUDA Device [4]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00380516 sec  GFLOPS=1904.72
+^^^^ elapsed = 0.00378585 sec  GFLOPS=1914.43
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00938797 sec  GFLOPS=772.026
+^^^^ elapsed = 0.00945902 sec  GFLOPS=766.227
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -356,12 +356,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.27700782 sec  GFLOPS=2616.45
+^^^^ elapsed = 0.27538681 sec  GFLOPS=2631.85
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61364913 sec  GFLOPS=1181.09
+^^^^ elapsed = 0.61350608 sec  GFLOPS=1181.37
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -369,12 +369,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.22492099 sec  GFLOPS=3222.36
+^^^^ elapsed = 0.22590184 sec  GFLOPS=3208.37
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.58139396 sec  GFLOPS=1246.62
+^^^^ elapsed = 0.58406305 sec  GFLOPS=1240.92
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -382,12 +382,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.57371902 sec  GFLOPS=1263.29
+^^^^ elapsed = 0.57596898 sec  GFLOPS=1258.36
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.74378991 sec  GFLOPS=415.632
+^^^^ elapsed = 1.75943089 sec  GFLOPS=411.938
 @@@@ dgemm test OK
 
 Test Summary
@@ -403,17 +403,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11329.0
+   33554432			11336.0
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11309.7
+   33554432			11343.6
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			169809.0
+   33554432			169758.7
 
 Result = PASS
 
@@ -427,12 +427,12 @@ gpuDeviceInit() CUDA Device [5]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00386310 sec  GFLOPS=1876.15
+^^^^ elapsed = 0.00381613 sec  GFLOPS=1899.24
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00945807 sec  GFLOPS=766.304
+^^^^ elapsed = 0.00955892 sec  GFLOPS=758.22
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -440,12 +440,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.29032516 sec  GFLOPS=2496.43
+^^^^ elapsed = 0.27632904 sec  GFLOPS=2622.87
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.63680005 sec  GFLOPS=1138.15
+^^^^ elapsed = 0.64181399 sec  GFLOPS=1129.26
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -453,12 +453,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.23164511 sec  GFLOPS=3128.82
+^^^^ elapsed = 0.23037815 sec  GFLOPS=3146.03
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61276412 sec  GFLOPS=1182.8
+^^^^ elapsed = 0.61033916 sec  GFLOPS=1187.5
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -466,12 +466,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61241484 sec  GFLOPS=1183.47
+^^^^ elapsed = 0.61509895 sec  GFLOPS=1178.31
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.85600615 sec  GFLOPS=390.503
+^^^^ elapsed = 1.86201596 sec  GFLOPS=389.242
 @@@@ dgemm test OK
 
 Test Summary
@@ -487,17 +487,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11319.8
+   33554432			11328.8
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11310.3
+   33554432			11350.1
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			169670.6
+   33554432			169702.1
 
 Result = PASS
 
@@ -511,12 +511,12 @@ gpuDeviceInit() CUDA Device [6]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00383520 sec  GFLOPS=1889.8
+^^^^ elapsed = 0.00383496 sec  GFLOPS=1889.92
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00950909 sec  GFLOPS=762.193
+^^^^ elapsed = 0.00953317 sec  GFLOPS=760.268
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -524,12 +524,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.28004193 sec  GFLOPS=2588.1
+^^^^ elapsed = 0.28293204 sec  GFLOPS=2561.66
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61472201 sec  GFLOPS=1179.03
+^^^^ elapsed = 0.61812401 sec  GFLOPS=1172.54
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -537,12 +537,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.22664499 sec  GFLOPS=3197.85
+^^^^ elapsed = 0.22603488 sec  GFLOPS=3206.48
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.58526707 sec  GFLOPS=1238.37
+^^^^ elapsed = 0.58924198 sec  GFLOPS=1230.01
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -550,12 +550,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.57432795 sec  GFLOPS=1261.95
+^^^^ elapsed = 0.58480406 sec  GFLOPS=1239.35
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.76983619 sec  GFLOPS=409.516
+^^^^ elapsed = 1.77810001 sec  GFLOPS=407.612
 @@@@ dgemm test OK
 
 Test Summary
@@ -571,17 +571,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11331.1
+   33554432			11318.7
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11327.6
+   33554432			11348.6
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			169675.5
+   33554432			169894.9
 
 Result = PASS
 
@@ -595,12 +595,12 @@ gpuDeviceInit() CUDA Device [7]: "Tesla K80
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00379395 sec  GFLOPS=1910.34
+^^^^ elapsed = 0.00378585 sec  GFLOPS=1914.43
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x0000000000000000, 0) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.00942898 sec  GFLOPS=768.668
+^^^^ elapsed = 0.00945091 sec  GFLOPS=766.884
 @@@@ dgemm test OK
 
  ==== Running N=100 without streams ==== 
@@ -608,12 +608,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbf800000, -1) beta= (0x00000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.28679991 sec  GFLOPS=2527.11
+^^^^ elapsed = 0.28285813 sec  GFLOPS=2562.33
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.64634204 sec  GFLOPS=1121.35
+^^^^ elapsed = 0.64703703 sec  GFLOPS=1120.15
 @@@@ dgemm test OK
 
  ==== Running N=100 with streams ==== 
@@ -621,12 +621,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x40000000, 2) beta= (0x40000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.23354888 sec  GFLOPS=3103.31
+^^^^ elapsed = 0.23326516 sec  GFLOPS=3107.09
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x0000000000000000, 0)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.61918497 sec  GFLOPS=1170.53
+^^^^ elapsed = 0.62360907 sec  GFLOPS=1162.23
 @@@@ dgemm test OK
 
  ==== Running N=100 batched ==== 
@@ -634,12 +634,12 @@ Testing dgemm
 Testing sgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0x3f800000, 1) beta= (0xbf800000, -1)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 0.62650585 sec  GFLOPS=1156.85
+^^^^ elapsed = 0.62704206 sec  GFLOPS=1155.86
 @@@@ sgemm test OK
 Testing dgemm
 #### args: ta=0 tb=0 m=1536 n=1536 k=1536  alpha = (0xbff0000000000000, -1) beta= (0x4000000000000000, 2)
 #### args: lda=1536 ldb=1536 ldc=1536
-^^^^ elapsed = 1.89625311 sec  GFLOPS=382.215
+^^^^ elapsed = 1.90612102 sec  GFLOPS=380.236
 @@@@ dgemm test OK
 
 Test Summary
@@ -655,17 +655,17 @@ Running on...
  Host to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11333.3
+   33554432			11331.2
 
  Device to Host Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			11308.6
+   33554432			11324.2
 
  Device to Device Bandwidth, 1 Device(s)
  PINNED Memory Transfers
    Transfer Size (Bytes)	Bandwidth(MB/s)
-   33554432			169704.0
+   33554432			169729.5
 
 Result = PASS
 
