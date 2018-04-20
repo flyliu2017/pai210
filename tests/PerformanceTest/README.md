@@ -33,6 +33,7 @@ python gpu-test.py --data_dir=/path/to/yaml
 该结果是在`192.168.2.216`集群上测试得到的，也就是`gpu105`上4块卡8个gpu的测试结果，  
 以下是gpu0的结果展示，完整文件可以查看`gpu105-test-result.txt`。
 
+**TODO：cuda的程序输出比较冗杂，编写脚本提取其中有效信息，形成简单格式**
 
 算力测试，其中sgemm和dgemm分别对应单精度和双精度,测试了四种模式，一般而言，  
 `Running N=100 with streams`的结果是最快的：

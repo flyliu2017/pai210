@@ -1,0 +1,3 @@
+TestDFSIO -write -nrFiles 10 -fileSize 10MB
+TestDFSIO -read -nrFiles 10 -fileSize 10MB
+

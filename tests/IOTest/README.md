@@ -2,6 +2,7 @@
 [fio 工具](https://media.readthedocs.org/pdf/fio/latest/fio.pdf)可以测试文件系统读写的 bw, iops, latency
 本脚本利用Fio命令进行文件系统IO的自动化测试
 ## 测试步骤
+### nfs IO 测试
 - 执行脚本  storage_performance_test.sh
 ```
 storage_performance_test.sh -d configdir -o outputdir
@@ -50,3 +51,46 @@ rw=randread
 
 - 输出结果含义
 可以参考 [Fio Output Explained](http://tobert.github.io/post/2014-04-17-fio-output-explained.html)
+
+### hdfs IO 测试
+- 执行脚本  hdfsIoTest.sh
+```
+hdfsIoTest.sh -h    
+            hdfsIoTest.sh options
+            -f,--file      file containing IO commands 
+            -o,--output    files produced by hdfs command will 
+                           be written into this director
+            -p,--pod       name of pod
+```
+
+```
+-f 指示hdfs命令文件所在的位置,示例如command.txt
+-o 指示IO测试结果存放的位置
+-p 指示 hdfs pod 的名称,可以 通过 kubectl get pods 命令查看
+```
+command.txt示例内容
+```
+TestDFSIO -write -nrFiles 10 -fileSize 10MB
+TestDFSIO -read -nrFiles 10 -fileSize 10MB
+```
+`nrFiles`表示文件个数,`fileSize`表示文件大小
+如果出现以下错误
+```
+INFO ipc.Client: Retrying connect to server: 0.0.0.0/0.0.0.0:8032. Already tried 0 time(s);
+```
+需要在yarn-site.xml中添加如下内容
+```
+<property>  
+    <name>yarn.resourcemanager.address</name>  
+    <value>master:8032</value>  
+  </property>  
+  <property>  
+    <name>yarn.resourcemanager.scheduler.address</name>  
+    <value>master:8030</value>  
+  </property>  
+  <property>  
+    <name>yarn.resourcemanager.resource-tracker.address</name>  
+    <value>master:8031</value>  
+  </property>  
+```
+*mater 替换为 hdfs mater节点的IP,如216测试环境替换master为192.168.2.216*
