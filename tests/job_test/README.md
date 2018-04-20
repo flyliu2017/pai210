@@ -13,6 +13,8 @@ cd tests/job_test/
 6、按照需求修改setup.ini  
 7、执行python3.6 test_user.py即可  
   
+备注：后续也可以将其他的性能测试工具在docker中运行， 提前修改dockerfile即可  
+  
 第二种，直接在本地机器运行：  
 1、检查本地机器和PAI平台的web端网络是否通，本地ping PAI-WEB-IP 即可  
 2、本地安装python3.6版本，及对应的pip  
