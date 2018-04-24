@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
 #Test calculation performance and bandwidth of all gpus (one by one) on the machine.
-#The result will be saved in ${hostname}-test-result.txt
-
 
 gpunum=$(nvidia-smi -L|wc -l)
 hostname=$(hostname)
 
-if [ -e ${hostname}-test-result.txt ]
-then
-	rm ${hostname}-test-result.txt
-fi
+function del_exited_file ()
+{
+    if [ -e $1 ]
+    then
+        rm $1
+    fi
+}
 
-if [ -e ${hostname}-simplified-result.txt ]
-then
-	rm ${hostname}-simplified-result.txt
-fi
+del_exited_file ${hostname}-test-result.txt
+del_exited_file ${hostname}-simplified-result.txt
+del_exited_file ${hostname}-p2pbandwidth.txt
+
 
 nvidia-smi -L | tee ${hostname}-simplified-result.txt
 
@@ -27,6 +28,9 @@ do
     ./bandwidthTest --device=$i
     let "i++"
 done | tee ${hostname}-test-result.txt
+
+./p2pBandwidthLatencyTest | sed -n '/Connectivity Matrix/,$p' | tee ${hostname}-p2pbandwidth.txt
+
 
 sed -n -r 's/.*GFLOPS=(.*)$/\1/p' gpu105-test-result.txt  > cal.txt
 
@@ -51,5 +55,6 @@ do
     let "i++"
     let "n+=8"
 done | tee -a ${hostname}-simplified-result.txt
+
 
 while true;do sleep 1000; done
