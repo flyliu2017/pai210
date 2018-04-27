@@ -35,6 +35,30 @@ python gpu-test.py --data_dir=/path/to/yaml
 该结果是在`192.168.2.216`集群上测试得到的，也就是`gpu105`上4块卡8个gpu的测试结果，  
 以下是gpu0的结果展示，完整文件可以查看`gpu105-test-result.txt`和`gpu105-p2bbandwidth.txt`。
 
+gpu105上8个gpu的拓扑结构矩阵，通过`nvidia-smi topo -m`命令得到：
+
+```
+	    GPU0	GPU1	GPU2	GPU3	GPU4	GPU5	GPU6	GPU7	CPU Affinity
+GPU0	 X 	    PIX	    SYS	    SYS	    SYS	     SYS	 SYS	 SYS	0-7,16-23
+GPU1	PIX	     X 	    SYS	    SYS	    SYS	     SYS	 SYS	 SYS	0-7,16-23
+GPU2	SYS	    SYS	     X 	    PIX	    PHB	     PHB	 PHB	 PHB	8-15,24-31
+GPU3	SYS	    SYS	    PIX	     X 	    PHB	     PHB	 PHB	 PHB	8-15,24-31
+GPU4	SYS	    SYS	    PHB	    PHB	     X 	     PIX	 PXB	 PXB	8-15,24-31
+GPU5	SYS	    SYS	    PHB	    PHB	    PIX	      X 	 PXB	 PXB	8-15,24-31
+GPU6	SYS	    SYS	    PHB	    PHB	    PXB	     PXB	  X 	 PIX	8-15,24-31
+GPU7	SYS	    SYS	    PHB	    PHB	    PXB	     PXB	 PIX	  X 	8-15,24-31
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe switches (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing a single PCIe switch
+  NV#  = Connection traversing a bonded set of # NVLinks
+```
+
 算力测试，其中sgemm和dgemm分别对应单精度和双精度,测试了四种模式，一般而言，  
 `Running N=100 with streams`的结果是最快的：
 
