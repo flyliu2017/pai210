@@ -1,0 +1,31 @@
+FROM 192.168.2.212:5000/leinao/drivers
+
+COPY start.sh /root
+
+WORKDIR /opt
+
+#RUN wget http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/mvapich2-2.3rc2.tar.gz && \
+#    tar -xvzf mvapich2-2.3rc2.tar.gz && \
+#    cd mvapich2-2.3rc2 && \
+#    ./configure --enable-cuda --with-cuda-include=/usr/local/cuda-8.0/include --with-ch3-rank-bits=32 && \
+#    make \
+#    make install
+
+RUN wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.gz && \
+    tar -xvzf openmpi-3.0.0.tar.gz && \
+    ./configure --with-cuda --prefix=/usr/local && \
+    make && \
+    make install
+
+RUN wget http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.4.2.tar.gz && \
+    ./configure CC=/path/to/mpicc    && \
+                CXX=/path/to/mpicxx   && \
+                --enable-cuda    && \
+                --with-cuda-include=/path/to/cuda/include   && \
+                --with-cuda-libpath=/path/to/cuda/lib   && \
+    make   && \
+    make install   && \
+
+RUN apt install openssh-server && \
+
+CMD /root/start.sh
